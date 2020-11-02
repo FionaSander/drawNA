@@ -27,9 +27,9 @@ def import_oxDNA(conf, top):
     import .conf and .top files to drawNA system
     """
     reader = OXDNAReader([conf, top])
-    strand_system = reader.system #or reader.strands??
+    strand_system = reader.system 
 
-    strand_system_strand = strand_system._strands # how do i extract strand from strand_system?
+    strand_system_strand = strand_system._strands # is this how i extract strands from strand_system?
 
     return strand_system, strand_system_strand
 
@@ -43,7 +43,6 @@ def add_strand_to_mother_system(mother_system, strand_system_strand):
     return mother_system
 
 
-#def transform(strand_system: drawNA.oxdna.Nucleotide, translation_vector: np.ndarray):
 def transform(strand_system, translation_vector: np.ndarray):
     """
     shift all coordinates of a system by a translation vector
