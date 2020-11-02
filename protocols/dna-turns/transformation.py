@@ -27,16 +27,18 @@ def import_oxDNA(conf, top):
     import .conf and .top files to drawNA system
     """
     reader = OXDNAReader([conf, top])
-    strand_system = reader.system #or reader.strand??
+    strand_system = reader.system #or reader.strands??
 
-    return strand_system
+    strand_system_strand = strand_system._strands # how do i extract strand from strand_system?
+
+    return strand_system, strand_system_strand
 
 
-def add_strand_system_to_mother_system(mother_system, strand_system):
+def add_strand_to_mother_system(mother_system, strand_system_strand):
     """
     add an imported strand from mrdna to the "mother" system
     """
-    mother_system.add_strand(strand_system)
+    mother_system.add_strands(strand_system_strand)
 
     return mother_system
 
@@ -48,7 +50,7 @@ def transform(strand_system, translation_vector: np.ndarray):
     """
     new_system = deepcopy(strand_system)
 
-    for nt in new_system._nucleotides:
+    for nt in new_system.nucleotides:#_nucleotides: not sure if this is the right way to do it but lets see...
         nt.pos_com += translation_vector
 
     return new_system
